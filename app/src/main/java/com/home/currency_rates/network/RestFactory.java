@@ -5,10 +5,9 @@ import com.home.currency_rates.BuildConfig;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.converter.protobuf.ProtoConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.home.currency_rates.network.RestConfig.baseUrl;
 
@@ -20,7 +19,7 @@ public class RestFactory {
             restRestService = new Retrofit.Builder()
                     .client(createClient())
                     .baseUrl(baseUrl)
-                    .addConverterFactory(ProtoConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(RestService.class);
         }
@@ -29,17 +28,12 @@ public class RestFactory {
 
     private static OkHttpClient createClient() {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        final OkHttpClient.Builder okHttpClientBuilder = builder.addInterceptor(chain -> {
-            Request.Builder ongoing = chain.request().newBuilder();
-
-            return chain.proceed(ongoing.build());
-        });
 
         if (BuildConfig.DEBUG) {
-            okHttpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+            builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
         }
 
-        return okHttpClientBuilder
+        return builder
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
