@@ -6,12 +6,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.home.currency_rates.model.CurrencyResponse;
-import com.home.currency_rates.model.Rates;
-import com.home.currency_rates.network.RestFactory;
-import com.home.currency_rates.network.RestService;
+import com.home.currency_rates.model.response.CurrencyData;
+import com.home.currency_rates.model.response.Rates;
+import com.home.currency_rates.network.RequestFactory;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,19 +24,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RestFactory.getService().getCurrencyRate(USD_BASE, USD_PLN_CURRENCY_RATE).enqueue(new Callback<CurrencyResponse>() {
+        RequestFactory.getService().getCurrencyRate(USD_BASE, USD_PLN_CURRENCY_RATE).enqueue(new Callback<CurrencyData>() {
             @Override
-            public void onResponse(Call<CurrencyResponse> call, Response<CurrencyResponse> response) {
+            public void onResponse(Call<CurrencyData> call, Response<CurrencyData> response) {
                 if (!response.isSuccessful()) {
                     return;
                 }
 
-                CurrencyResponse currencyResponse = response.body();
-                if (currencyResponse == null) {
+                CurrencyData currencyData = response.body();
+                if (currencyData == null) {
                     return;
                 }
 
-                Rates rates = currencyResponse.getRates();
+                Rates rates = currencyData.getRates();
                 if (rates == null) {
                     return;
                 }
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CurrencyResponse> call, Throwable t) {
+            public void onFailure(Call<CurrencyData> call, Throwable t) {
                 Toast.makeText(MainActivity.this, t.toString(), Toast.LENGTH_SHORT).show(); // ALL NETWORK ERROR HERE
             }
         });

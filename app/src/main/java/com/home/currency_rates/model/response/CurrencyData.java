@@ -1,6 +1,6 @@
-package com.home.currency_rates.model;
+package com.home.currency_rates.model.response;
 
-public class CurrencyResponse {
+public class CurrencyData {
     private String date;
 
     private Rates rates;
@@ -33,6 +33,6 @@ public class CurrencyResponse {
 
     @Override
     public String toString() {
-        return "CurrencyResponse [date = " + date + ", rates = " + rates + ", base = " + base + "]";
+        return "CurrencyData [date = " + date + ", rates = " + rates + ", base = " + base + "]";
     }
 }

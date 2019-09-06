@@ -1,4 +1,4 @@
-package com.home.currency_rates.model;
+package com.home.currency_rates.model.response;
 
 public class Rates {
     private String PLN;

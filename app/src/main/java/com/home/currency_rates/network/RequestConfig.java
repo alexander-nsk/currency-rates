@@ -1,5 +1,5 @@
 package com.home.currency_rates.network;
 
-final class RestConfig {
+final class RequestConfig {
     static final String baseUrl = "https://api.exchangeratesapi.io/";
 }

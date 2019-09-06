@@ -9,21 +9,21 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.home.currency_rates.network.RestConfig.baseUrl;
+import static com.home.currency_rates.network.RequestConfig.baseUrl;
 
-public class RestFactory {
-    private static RestService restRestService = null;
+public class RequestFactory {
+    private static Request restRequest = null;
 
-    public static RestService getService() {
-        if (restRestService == null) {
-            restRestService = new Retrofit.Builder()
+    public static Request getService() {
+        if (restRequest == null) {
+            restRequest = new Retrofit.Builder()
                     .client(createClient())
                     .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-                    .create(RestService.class);
+                    .create(Request.class);
         }
-        return restRestService;
+        return restRequest;
     }
 
     private static OkHttpClient createClient() {
