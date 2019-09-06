@@ -9,7 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.home.currency_rates.network.RequestConfig.baseUrl;
+import static com.home.currency_rates.network.RequestParams.BASE_URL;
 
 public class RequestFactory {
     private static Request restRequest = null;
@@ -18,7 +18,7 @@ public class RequestFactory {
         if (restRequest == null) {
             restRequest = new Retrofit.Builder()
                     .client(createClient())
-                    .baseUrl(baseUrl)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(Request.class);
