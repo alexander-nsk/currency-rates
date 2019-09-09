@@ -1,5 +1,6 @@
 package com.home.currency_rates.network.response;
 
+//Class which represents server request
 public class CurrencyData {
     private String date;
 

@@ -15,6 +15,7 @@ import static com.home.currency_rates.network.RequestParams.TIME_OUT;
 public class RequestService {
     private static CurrencyService restCurrencyService = null;
 
+    //create and config the retrofit request service
     public static CurrencyService getService() {
         if (restCurrencyService == null) {
             restCurrencyService = new Retrofit.Builder()

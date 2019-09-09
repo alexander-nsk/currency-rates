@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 
 import static com.home.currency_rates.network.RequestParams.GET_LATEST;
 
+//request interface
 public interface CurrencyService {
     @GET(GET_LATEST)
     Call<CurrencyData> getCurrencyRate(@Query("base") String base, @Query("symbols") String symbols);
