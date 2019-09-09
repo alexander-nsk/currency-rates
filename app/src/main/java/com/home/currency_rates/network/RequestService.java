@@ -10,20 +10,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.home.currency_rates.network.RequestParams.BASE_URL;
+import static com.home.currency_rates.network.RequestParams.TIME_OUT;
 
-public class RequestFactory {
-    private static Request restRequest = null;
+public class RequestService {
+    private static CurrencyService restCurrencyService = null;
 
-    public static Request getService() {
-        if (restRequest == null) {
-            restRequest = new Retrofit.Builder()
+    public static CurrencyService getService() {
+        if (restCurrencyService == null) {
+            restCurrencyService = new Retrofit.Builder()
                     .client(createClient())
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-                    .create(Request.class);
+                    .create(CurrencyService.class);
         }
-        return restRequest;
+        return restCurrencyService;
     }
 
     private static OkHttpClient createClient() {
@@ -34,9 +35,9 @@ public class RequestFactory {
         }
 
         return builder
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .build();
     }
 }

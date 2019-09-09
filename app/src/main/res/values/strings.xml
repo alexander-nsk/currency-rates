@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Currency Rates</string>
     <string name="main_usd_pln_currency">1 USD = %1s PLN</string>
+    <string name="main_usd_pln_currency_error">1 USD = %1s PLN</string>
+
 </resources>
+    

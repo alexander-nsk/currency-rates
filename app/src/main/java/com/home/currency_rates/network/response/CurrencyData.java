@@ -1,4 +1,4 @@
-package com.home.currency_rates.model.response;
+package com.home.currency_rates.network.response;
 
 public class CurrencyData {
     private String date;
